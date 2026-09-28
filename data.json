@@ -1,5 +1,15 @@
 [
     {
+        "Name": "MANTHAN",
+        "DOB": "31/12/2007",
+        "Age": 18,
+        "Gender": "MALE",
+        "Email": "abc@gmail.com",
+        "Account No.": "684100576684997",
+        "PIN": "$2b$12$N91to3lUJvuUqr8TT5D32OaGps.Sle2MlxI/sbTTEeLi1HR2Na3XG",
+        "Balance": 100000000000000000000000000000000000000000000
+    },
+    {
         "Name": "RAJ",
         "DOB": "4/2/2003",
         "Age": 23,
@@ -7,6 +17,16 @@
         "Email": "raj@gmail.com",
         "Account No.": "658449072054895",
         "PIN": "$2b$12$DEAvKZ09tQT//m/7quh8rOFheG5dK4cquTL5M6/fgRscX3IKt9U7S",
+        "Balance": 1
+    },
+    {
+        "Name": "RANI",
+        "DOB": "1/1/2001",
+        "Age": 25,
+        "Gender": "FEMALE",
+        "Email": "rani@raja.com",
+        "Account No.": "408881279194061",
+        "PIN": "$2b$12$pqIqURhXcFXSOPE5VuvzzO8e49gusKegypnC3RTo1z3FZmtftfSoq",
         "Balance": 0
     }
 ]

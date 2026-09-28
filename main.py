@@ -4,7 +4,8 @@ import random
 import string
 import datetime
 import bcrypt
-
+import mysql.connector
+from tabulate import tabulate
 
 # New User Data
 class userInfo:
@@ -15,7 +16,7 @@ class userInfo:
     def dob(self):
         print("Date of Birth")
         self.day = int(input("Day: "))
-        self.month = int(input("Month (in numaric): "))
+        self.month = int(input("Month (in numeric): "))
         self.year = int(input("Year: "))
         return f"{self.day}/{self.month}/{self.year}"
 
@@ -25,11 +26,16 @@ class userInfo:
         return age
     
     def Gender(self):
-        gender = input("Gender (M/F): ").upper()
-        if gender == 'M':
-            return "MALE"
-        else:
-            return "FEMALE"
+        while 1:
+            gender = input("Gender (M/F): ")
+            if gender.lower() == 'm':
+                return "MALE"
+            elif gender.lower() == 'f':
+                return "FEMALE"
+            else:
+                print("Invalid input.")
+                
+    
     
     def Email(self):
         email = input("Email: ")
@@ -38,7 +44,7 @@ class userInfo:
     
     
     def Pin(self):
-        pin = input("Create 4-degit pin: ")
+        pin = input("Create 4-digit pin: ")
         if not (pin.isdigit() and len(pin) == 4):
             print("PIN must be exactly 4 digits")
             return self.Pin()
@@ -104,9 +110,8 @@ class Bank:
             'Balance': 0
         }
         
-        # info["PIN"] = int(info["PIN"])
         
-        #Check age > = 18 and pin has 4 degits
+        #Check age > = 18 and pin has 4 digits
         if info['Age'] < 18:
             print("You can't open account")
             print("-------------------------------------------------")
@@ -150,7 +155,7 @@ class Bank:
             print(f"An exception Ocurred as {err}")
             
     # Whidhrow money       
-    def moneyWhidhraw(self):
+    def moneyWithdraw(self):
         try:
             accNum = input("Enter Account Number: ")
             pin = input("Enter PIN: ")
@@ -188,7 +193,7 @@ class Bank:
         userData = [i for i in Bank.data if i['Account No.'] == accNum and bcrypt.checkpw(pin.encode('utf-8'), i['PIN'].encode('utf8'))]
         
         if userData == False:
-            print("Account Dosen't Exist")
+            print("Account Doesn't Exist")
             print("-------------------------------------------------")
             
         else:
@@ -207,7 +212,7 @@ class Bank:
         userData = [i for i in Bank.data if i['Account No.'] == accNum and bcrypt.checkpw(pin.encode('utf-8'), i['PIN'].encode('utf8'))]
         
         if userData == False:
-            print("Account Dosen't Exist")
+            print("Account Doesn't Exist")
             print("-------------------------------------------------")
             
         else:
@@ -261,7 +266,7 @@ class Bank:
         userData = [i for i in Bank.data if i['Account No.'] == accNum and bcrypt.checkpw(pin.encode('utf-8'), i['PIN'].encode('utf8'))]
         
         if userData == False:
-            print("Account Dosen't Exist")
+            print("Account Doesn't Exist")
             print("-------------------------------------------------")
                         
         else:
@@ -269,12 +274,12 @@ class Bank:
                 print(f"{i} : {userData[0][i]}")
                 
             print("-------------------------------------------------")
-            conf = input("Are you want to close account (y): ")
+            conf = input("Do you want to close account (y): ")
             if conf.lower() == 'y':
                 index = Bank.data.index(userData[0])
                 Bank.data.pop(index)
                 
-                print(("Account close successfully").upper())
+                print(("Account closed successfully").upper())
                 print("-------------------------------------------------")
                 
                 Bank.__update()
@@ -288,14 +293,14 @@ user = Bank()
 while 1:
     print("1. Open Account")
     print("2. Deposit Money")
-    print("3. Whidhraw Money")
+    print("3. Withdraw Money")
     print("4. View Passbook")
     print("5. Update Details")
     print("6. Close Account")
     print("0. Exit")
     print("------------------------------------------------")
 
-    opt = int(input("Enter your responce: "))
+    opt = int(input("Enter your response: "))
     print("------------------------------------------------")
 
     if opt == 1:
@@ -305,7 +310,7 @@ while 1:
         user.moneyDeposit()
         
     elif opt == 3:
-        user.moneyWhidhraw()
+        user.moneyWithdraw()
         
     elif opt == 4:
         user.showDetails()
